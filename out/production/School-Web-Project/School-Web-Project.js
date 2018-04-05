@@ -8,7 +8,10 @@ this['School-Web-Project'] = function (_, Kotlin) {
   var Enum = Kotlin.kotlin.Enum;
   var throwISE = Kotlin.throwISE;
   var Unit = Kotlin.kotlin.Unit;
+  var appendElement = Kotlin.kotlin.dom.appendElement_ldvnw0$;
   var PropertyMetadata = Kotlin.PropertyMetadata;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var createElement = Kotlin.kotlin.dom.createElement_7cgwi1$;
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
   var ensureNotNull = Kotlin.ensureNotNull;
@@ -16,7 +19,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   var equals = Kotlin.equals;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
-  var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
   MdlColor$Background.prototype = Object.create(MdlColor.prototype);
   MdlColor$Background.prototype.constructor = MdlColor$Background;
   MdlColor$Background$blueGrey.prototype = Object.create(MdlColor$Background.prototype);
@@ -1580,7 +1583,6 @@ this['School-Web-Project'] = function (_, Kotlin) {
     init(app);
     return app;
   }
-  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
   function MdlApp() {
     this.app_0 = document.getElementById('MdlApp');
     if (this.app_0 == null) {
@@ -1618,6 +1620,8 @@ this['School-Web-Project'] = function (_, Kotlin) {
     if (shadow === void 0)
       shadow = Card$Shadow$DP2_getInstance();
     MdlComponent.call(this, 'div', 'mdl-card ' + shadow, cssClassId);
+    this.button_3su3m$_0 = null;
+    this.image_cupue3$_0 = null;
     this.title_7p2xyw$_0 = '';
     this.supportingText_jh93qk$_0 = '';
   }
@@ -1772,6 +1776,58 @@ this['School-Web-Project'] = function (_, Kotlin) {
       height = -1;
     this.mainElement.setAttribute('style', 'width: ' + width + 'px; height: ' + height + 'px;');
   };
+  function Card$set_Card$button$lambda$lambda(closure$value, this$) {
+    return function (f) {
+      closure$value.onClick(this$);
+      return Unit;
+    };
+  }
+  function Card$set_Card$button$lambda(closure$value, this$Card) {
+    return function ($receiver) {
+      classType($receiver, 'mdl-button mdl-js-button mdl-js-ripple-effect ' + closure$value.color);
+      $receiver.textContent = closure$value.text;
+      this$Card.mainElement.addEventListener('click', Card$set_Card$button$lambda$lambda(closure$value, $receiver));
+      return Unit;
+    };
+  }
+  Object.defineProperty(Card.prototype, 'button', {
+    get: function () {
+      return this.button_3su3m$_0;
+    },
+    set: function (value) {
+      var tmp$;
+      if (value != null) {
+        appendElement(this.mainElement, 'a', Card$set_Card$button$lambda(value, this));
+      }
+       else {
+        (tmp$ = this.mainElement.getElementsByClassName('mdl-button')[0]) != null ? (tmp$.remove(), Unit) : null;
+      }
+    }
+  });
+  Object.defineProperty(Card.prototype, 'image', {
+    get: function () {
+      return this.image_cupue3$_0;
+    },
+    set: function (value) {
+      var tmp$;
+      if (value != null) {
+        var $receiver = this.mainElement;
+        var classId = 'mdl-card__media';
+        var $receiver_0 = document.createElement('div');
+        classType($receiver_0, classId);
+        var div = $receiver_0;
+        var img = new Img('card_helper');
+        img.src = value.url;
+        img.alt = value.alt;
+        div.append(img.mainElement);
+        img.mainElement;
+        $receiver.append(div);
+      }
+       else {
+        (tmp$ = this.mainElement.getElementsByClassName('mdl-card__media')[0]) != null ? (tmp$.remove(), Unit) : null;
+      }
+    }
+  });
   Object.defineProperty(Card.prototype, 'title', {
     get: function () {
       return this.title_7p2xyw$_0;
@@ -1805,6 +1861,73 @@ this['School-Web-Project'] = function (_, Kotlin) {
       $receiver.append(div);
     }
   });
+  function Card$Image(url, alt) {
+    if (alt === void 0)
+      alt = '';
+    this.url = url;
+    this.alt = alt;
+  }
+  Card$Image.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Image',
+    interfaces: []
+  };
+  Card$Image.prototype.component1 = function () {
+    return this.url;
+  };
+  Card$Image.prototype.component2 = function () {
+    return this.alt;
+  };
+  Card$Image.prototype.copy_puj7f4$ = function (url, alt) {
+    return new Card$Image(url === void 0 ? this.url : url, alt === void 0 ? this.alt : alt);
+  };
+  Card$Image.prototype.toString = function () {
+    return 'Image(url=' + Kotlin.toString(this.url) + (', alt=' + Kotlin.toString(this.alt)) + ')';
+  };
+  Card$Image.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.url) | 0;
+    result = result * 31 + Kotlin.hashCode(this.alt) | 0;
+    return result;
+  };
+  Card$Image.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.url, other.url) && Kotlin.equals(this.alt, other.alt)))));
+  };
+  function Card$Button(text, color, onClick) {
+    this.text = text;
+    this.color = color;
+    this.onClick = onClick;
+  }
+  Card$Button.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Button',
+    interfaces: []
+  };
+  Card$Button.prototype.component1 = function () {
+    return this.text;
+  };
+  Card$Button.prototype.component2 = function () {
+    return this.color;
+  };
+  Card$Button.prototype.component3 = function () {
+    return this.onClick;
+  };
+  Card$Button.prototype.copy_ra6vw2$ = function (text, color, onClick) {
+    return new Card$Button(text === void 0 ? this.text : text, color === void 0 ? this.color : color, onClick === void 0 ? this.onClick : onClick);
+  };
+  Card$Button.prototype.toString = function () {
+    return 'Button(text=' + Kotlin.toString(this.text) + (', color=' + Kotlin.toString(this.color)) + (', onClick=' + Kotlin.toString(this.onClick)) + ')';
+  };
+  Card$Button.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.text) | 0;
+    result = result * 31 + Kotlin.hashCode(this.color) | 0;
+    result = result * 31 + Kotlin.hashCode(this.onClick) | 0;
+    return result;
+  };
+  Card$Button.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.text, other.text) && Kotlin.equals(this.color, other.color) && Kotlin.equals(this.onClick, other.onClick)))));
+  };
   Card.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Card',
@@ -1882,6 +2005,177 @@ this['School-Web-Project'] = function (_, Kotlin) {
     kind: Kind_CLASS,
     simpleName: 'Chip',
     interfaces: [MdlComponent]
+  };
+  function dialog($receiver, cssClassId, init) {
+    if (cssClassId === void 0)
+      cssClassId = '';
+    var dialog = new Dialog(cssClassId);
+    init(dialog);
+    return dialog.mainElement;
+  }
+  function Dialog(cssClassId) {
+    Dialog$Companion_getInstance();
+    if (cssClassId === void 0)
+      cssClassId = '';
+    this.mainElement = null;
+    this.mainElement = createElement(document, 'dialog', Dialog_init$lambda(cssClassId));
+    dialogPolyfill.registerDialog(this.mainElement);
+    this.open_0();
+    this.title_2eziy8$_0 = '';
+    this.content_rj5df5$_0 = '';
+    this.buttonOne_x4mffw$_0 = null;
+  }
+  function Dialog$Companion() {
+    Dialog$Companion_instance = this;
+    this.isADialogAlreadyOpen = false;
+  }
+  Dialog$Companion.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var Dialog$Companion_instance = null;
+  function Dialog$Companion_getInstance() {
+    if (Dialog$Companion_instance === null) {
+      new Dialog$Companion();
+    }
+    return Dialog$Companion_instance;
+  }
+  Object.defineProperty(Dialog.prototype, 'title', {
+    get: function () {
+      return this.title_2eziy8$_0;
+    },
+    set: function (value) {
+      var $receiver = this.mainElement;
+      var classId = 'mdl-dialog__title';
+      var $receiver_0 = document.createElement('h2');
+      classType($receiver_0, classId);
+      var h2 = $receiver_0;
+      h2.textContent = value;
+      $receiver.append(h2);
+    }
+  });
+  function Dialog$set_Dialog$content$lambda$lambda(closure$value) {
+    return function ($receiver) {
+      $receiver.textContent = closure$value;
+      return Unit;
+    };
+  }
+  Object.defineProperty(Dialog.prototype, 'content', {
+    get: function () {
+      return this.content_rj5df5$_0;
+    },
+    set: function (value) {
+      var $receiver = this.mainElement;
+      var classId = 'mdl-dialog__content';
+      var $receiver_0 = document.createElement('div');
+      classType($receiver_0, classId);
+      var div = $receiver_0;
+      appendElement(div, 'p', Dialog$set_Dialog$content$lambda$lambda(value));
+      $receiver.append(div);
+    }
+  });
+  function Dialog$set_Dialog$buttonOne$lambda$lambda(closure$value, this$, this$Dialog) {
+    return function (f) {
+      closure$value.onClick(this$);
+      if (closure$value.shouldClose) {
+        this$Dialog.close_0();
+      }
+      return Unit;
+    };
+  }
+  function Dialog$set_Dialog$buttonOne$lambda(closure$value, this$Dialog) {
+    return function ($receiver) {
+      classType($receiver, 'mdl-button mdl-js-button mdl-js-ripple-effect ' + closure$value.color);
+      $receiver.textContent = closure$value.text.toUpperCase();
+      this$Dialog.mainElement.addEventListener('click', Dialog$set_Dialog$buttonOne$lambda$lambda(closure$value, $receiver, this$Dialog));
+      return Unit;
+    };
+  }
+  Object.defineProperty(Dialog.prototype, 'buttonOne', {
+    get: function () {
+      return this.buttonOne_x4mffw$_0;
+    },
+    set: function (value) {
+      var tmp$;
+      if (value != null) {
+        appendElement(this.mainElement, 'a', Dialog$set_Dialog$buttonOne$lambda(value, this));
+      }
+       else {
+        (tmp$ = this.mainElement.getElementsByClassName('mdl-button')[0]) != null ? (tmp$.remove(), Unit) : null;
+      }
+    }
+  });
+  Dialog.prototype.open_0 = function () {
+    var tmp$;
+    if (!Dialog$Companion_getInstance().isADialogAlreadyOpen) {
+      Dialog$Companion_getInstance().isADialogAlreadyOpen = true;
+      (tmp$ = document.getElementsByTagName('body')[0]) != null ? (tmp$.append(this.mainElement), Unit) : null;
+      var mainElementInsecure = this.mainElement;
+      mainElementInsecure.showModal();
+    }
+  };
+  Dialog.prototype.close_0 = function () {
+    var mainElementInsecure = this.mainElement;
+    mainElementInsecure.close();
+    this.mainElement.remove();
+    Dialog$Companion_getInstance().isADialogAlreadyOpen = false;
+  };
+  function Dialog$Button(text, shouldClose, color, onClick) {
+    if (onClick === void 0)
+      onClick = Dialog$Dialog$Button_init$lambda;
+    this.text = text;
+    this.shouldClose = shouldClose;
+    this.color = color;
+    this.onClick = onClick;
+  }
+  function Dialog$Dialog$Button_init$lambda($receiver) {
+    return Unit;
+  }
+  Dialog$Button.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Button',
+    interfaces: []
+  };
+  Dialog$Button.prototype.component1 = function () {
+    return this.text;
+  };
+  Dialog$Button.prototype.component2 = function () {
+    return this.shouldClose;
+  };
+  Dialog$Button.prototype.component3 = function () {
+    return this.color;
+  };
+  Dialog$Button.prototype.component4 = function () {
+    return this.onClick;
+  };
+  Dialog$Button.prototype.copy_f42jb1$ = function (text, shouldClose, color, onClick) {
+    return new Dialog$Button(text === void 0 ? this.text : text, shouldClose === void 0 ? this.shouldClose : shouldClose, color === void 0 ? this.color : color, onClick === void 0 ? this.onClick : onClick);
+  };
+  Dialog$Button.prototype.toString = function () {
+    return 'Button(text=' + Kotlin.toString(this.text) + (', shouldClose=' + Kotlin.toString(this.shouldClose)) + (', color=' + Kotlin.toString(this.color)) + (', onClick=' + Kotlin.toString(this.onClick)) + ')';
+  };
+  Dialog$Button.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.text) | 0;
+    result = result * 31 + Kotlin.hashCode(this.shouldClose) | 0;
+    result = result * 31 + Kotlin.hashCode(this.color) | 0;
+    result = result * 31 + Kotlin.hashCode(this.onClick) | 0;
+    return result;
+  };
+  Dialog$Button.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.text, other.text) && Kotlin.equals(this.shouldClose, other.shouldClose) && Kotlin.equals(this.color, other.color) && Kotlin.equals(this.onClick, other.onClick)))));
+  };
+  function Dialog_init$lambda(closure$cssClassId) {
+    return function ($receiver) {
+      classType($receiver, closure$cssClassId + ' backdrop mdl-dialog');
+      return Unit;
+    };
+  }
+  Dialog.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'Dialog',
+    interfaces: []
   };
   var list = defineInlineFunction('School-Web-Project.components.list_tt4us9$', wrapFunction(function () {
     var List_init = _.components.List;
@@ -2304,14 +2598,14 @@ this['School-Web-Project'] = function (_, Kotlin) {
       this.href_rf7tue$_0.setValue_9rddgb$(this, Nav$Link$href_metadata, href);
     }
   });
-  function Nav$Link$onClick$lambda(closure$doOn) {
+  function Nav$Link$onClick$lambda(this$Link, closure$doOn) {
     return function (f) {
-      closure$doOn();
+      closure$doOn(this$Link.mainElement);
       return Unit;
     };
   }
-  Nav$Link.prototype.onClick_o14v8n$ = function (doOn) {
-    this.mainElement.addEventListener('click', Nav$Link$onClick$lambda(doOn));
+  Nav$Link.prototype.onClick_fatjke$ = function (doOn) {
+    this.mainElement.addEventListener('click', Nav$Link$onClick$lambda(this, doOn));
   };
   Nav$Link.$metadata$ = {
     kind: Kind_CLASS,
@@ -2527,281 +2821,273 @@ this['School-Web-Project'] = function (_, Kotlin) {
   function classType($receiver, className) {
     $receiver.setAttribute('class', className);
   }
-  function main$lambda$lambda$lambda($receiver) {
+  function Color() {
+    Color_instance = this;
+    this.primary = (new MdlColor$Background$pink(Shade$s800_getInstance())).toString();
+    this.accent = (new MdlColor$Background$red(Shade$s400_getInstance())).toString();
+  }
+  Color.$metadata$ = {
+    kind: Kind_OBJECT,
+    simpleName: 'Color',
+    interfaces: []
+  };
+  var Color_instance = null;
+  function Color_getInstance() {
+    if (Color_instance === null) {
+      new Color();
+    }
+    return Color_instance;
+  }
+  var MAINPAGE_TITLE;
+  var FORUM_TITLE;
+  function main(args) {
+    var tmp$, tmp$_0, tmp$_1;
+    tmp$ = document.getElementById('MdlApp');
+    if (tmp$ == null) {
+      throw IllegalArgumentException_init('No MldApp Element found!');
+    }
+    tmp$_1 = Kotlin.isType(tmp$_0 = tmp$, HTMLElement) ? tmp$_0 : null;
+    if (tmp$_1 == null) {
+      throw IllegalArgumentException_init('MldApp Element is not div!');
+    }
+    var start = tmp$_1;
+    switch (start.title) {
+      case 'Main':
+        MainPage_getInstance().createPage();
+        break;
+      case 'Forum':
+        Forums_getInstance().createPage();
+        break;
+      case '':
+        throw IllegalArgumentException_init('MldApp Element has no title!');
+      default:throw IllegalArgumentException_init('MldApp Element title not defined!');
+    }
+  }
+  function Forums() {
+    Forums_instance = this;
+    this.content_77jnk1$_0 = content('Foros', void 0, Forums$content$lambda);
+  }
+  function Forums$createPage$lambda$lambda$lambda($receiver) {
     return Unit;
   }
-  function main$lambda$lambda$lambda$lambda$lambda$lambda(this$) {
-    return function () {
-      this$.content = About_getInstance();
-      return Unit;
-    };
+  function Forums$createPage$lambda$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.text = 'Foros';
+    $receiver.materialIcons = 'forum';
+    $receiver.href = 'forum.html';
+    return Unit;
   }
-  function main$lambda$lambda$lambda$lambda$lambda(this$) {
-    return function ($receiver) {
-      $receiver.text = 'About';
-      $receiver.materialIcons = 'account_circle';
-      $receiver.onClick_o14v8n$(main$lambda$lambda$lambda$lambda$lambda$lambda(this$));
-      return Unit;
-    };
-  }
-  function main$lambda$lambda$lambda$lambda$lambda_0($receiver) {
-    $receiver.text = 'Blog';
-    $receiver.materialIcons = 'book';
+  function Forums$createPage$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    $receiver.text = 'Ingresar';
+    $receiver.materialIcons = 'account_circle';
     $receiver.href = 'https://medium.com/lewisrhine';
     return Unit;
   }
-  function main$lambda$lambda$lambda$lambda$lambda_1($receiver) {
-    $receiver.text = 'Projects';
-    $receiver.materialIcons = 'build';
+  function Forums$createPage$lambda$lambda$lambda$lambda$lambda_1($receiver) {
+    $receiver.text = 'Acerca de';
+    $receiver.materialIcons = 'info';
     $receiver.href = 'https://github.com/lewisrhine';
     return Unit;
   }
-  function main$lambda$lambda$lambda$lambda$lambda_2($receiver) {
-    $receiver.text = 'Twitter';
-    $receiver.href = 'https://twitter.com/lewisrhine';
-    var tmp$ = $receiver.mainElement;
-    var $receiver_0 = document.createElement('i');
-    $receiver_0.setAttribute('class', 'material-icons fa fa-twitter');
-    tmp$.append($receiver_0);
+  function Forums$createPage$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.link_g1rzco$(Forums$createPage$lambda$lambda$lambda$lambda$lambda);
+    $receiver.link_g1rzco$(Forums$createPage$lambda$lambda$lambda$lambda$lambda_0);
+    $receiver.link_g1rzco$(Forums$createPage$lambda$lambda$lambda$lambda$lambda_1);
     return Unit;
   }
-  function main$lambda$lambda$lambda$lambda$lambda_3($receiver) {
-    $receiver.text = 'Instagram';
-    $receiver.href = 'https://www.instagram.com/lewisrhine';
-    var tmp$ = $receiver.mainElement;
-    var $receiver_0 = document.createElement('i');
-    $receiver_0.setAttribute('class', 'material-icons fa fa-instagram');
-    tmp$.append($receiver_0);
+  function Forums$createPage$lambda$lambda$lambda_0($receiver) {
+    var $receiver_0 = $receiver.mainElement;
+    var classId = 'drawer-header';
+    var $receiver_1 = document.createElement('header');
+    classType($receiver_1, classId);
+    var header = $receiver_1;
+    header.setAttribute('style', " background: url('images/whoiam.jpg') center / cover; padding: 10px;");
+    $receiver_0.append(header);
+    $receiver.nav_huf4ba$('navigation', Forums$createPage$lambda$lambda$lambda$lambda);
     return Unit;
   }
-  function main$lambda$lambda$lambda$lambda$lambda_4($receiver) {
-    $receiver.text = 'LinkedIn';
-    $receiver.href = 'https://www.linkedin.com/in/lewisrhine';
-    var tmp$ = $receiver.mainElement;
-    var $receiver_0 = document.createElement('i');
-    $receiver_0.setAttribute('class', 'material-icons fa fa-linkedin');
-    tmp$.append($receiver_0);
+  function Forums$createPage$lambda$lambda($receiver) {
+    $receiver.header_jktz5e$(Color_getInstance().primary, void 0, void 0, Forums$createPage$lambda$lambda$lambda);
+    $receiver.drawer_pvsmkh$('drawer', void 0, Forums$createPage$lambda$lambda$lambda_0);
     return Unit;
   }
-  function main$lambda$lambda$lambda$lambda$lambda_5($receiver) {
-    $receiver.text = 'email';
-    $receiver.href = 'mailto:lewisrhine@gmail.com';
-    $receiver.materialIcons = 'email';
+  function Forums$createPage$lambda($receiver) {
+    $receiver.navigationLayout_d0ce5n$(Forums_getInstance(), 'layout', Forums$createPage$lambda$lambda);
     return Unit;
   }
-  function main$lambda$lambda$lambda$lambda(this$) {
-    return function ($receiver) {
-      $receiver.link_g1rzco$(main$lambda$lambda$lambda$lambda$lambda(this$));
-      $receiver.link_g1rzco$(main$lambda$lambda$lambda$lambda$lambda_0);
-      $receiver.link_g1rzco$(main$lambda$lambda$lambda$lambda$lambda_1);
-      $receiver.link_g1rzco$(main$lambda$lambda$lambda$lambda$lambda_2);
-      $receiver.link_g1rzco$(main$lambda$lambda$lambda$lambda$lambda_3);
-      $receiver.link_g1rzco$(main$lambda$lambda$lambda$lambda$lambda_4);
-      $receiver.link_g1rzco$(main$lambda$lambda$lambda$lambda$lambda_5);
-      return Unit;
-    };
-  }
-  function main$lambda$lambda$lambda_0(this$) {
-    return function ($receiver) {
-      var $receiver_0 = $receiver.mainElement;
-      var classId = 'drawer-header ' + new MdlColor$Background$blueGrey(Shade$s300_getInstance());
-      var $receiver_1 = document.createElement('header');
-      classType($receiver_1, classId);
-      var header = $receiver_1;
-      var img = new Img('avatar');
-      img.src = 'images/roundprofile.png';
-      header.append(img.mainElement);
-      img.mainElement;
-      var b = document.createElement('b');
-      b.textContent = 'Lewis Rhine';
-      header.append(b);
-      header.append(document.createTextNode('Android Developer'));
-      $receiver_0.append(header);
-      $receiver.nav_huf4ba$('navigation', main$lambda$lambda$lambda$lambda(this$));
-      return Unit;
-    };
-  }
-  function main$lambda$lambda($receiver) {
-    $receiver.header_jktz5e$(void 0, void 0, void 0, main$lambda$lambda$lambda);
-    $receiver.drawer_pvsmkh$('drawer', void 0, main$lambda$lambda$lambda_0($receiver));
-    return Unit;
-  }
-  function main$lambda($receiver) {
-    $receiver.navigationLayout_d0ce5n$(About_getInstance(), 'layout', main$lambda$lambda);
-    return Unit;
-  }
-  function main(args) {
-    var mdlApp_0 = mdlApp(main$lambda);
-  }
-  function About() {
-    About_instance = this;
-    this.content_7adpqh$_0 = content('About', void 0, About$content$lambda);
-  }
-  Object.defineProperty(About.prototype, 'content', {
+  Forums.prototype.createPage = function () {
+    var mdlApp_0 = mdlApp(Forums$createPage$lambda);
+  };
+  Object.defineProperty(Forums.prototype, 'content', {
     get: function () {
-      return this.content_7adpqh$_0;
+      return this.content_77jnk1$_0;
     }
   });
-  function About$content$lambda$lambda$lambda($receiver) {
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda_0($receiver) {
-    $receiver.title = 'About me';
-    $receiver.supportingText = "Completely self-taught, I began my love for writing code when I was you kid and found out about QBasic on the family computer. In my day to day life, I enjoy keeping up with new developments within the technology and android community. I am very passionate about clean thought out architecture in the code I write. And believe strongly in testing as much as possible. Even on Android where it's not the easiest to accomplish.";
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda_1($receiver) {
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda_2($receiver) {
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda($receiver) {
-    $receiver.src = 'images/java-logo.png';
-    $receiver.text = 'Java';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda_0($receiver) {
-    $receiver.src = 'images/kotlin-logo.png';
-    $receiver.text = 'Kotlin';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda_1($receiver) {
-    $receiver.src = 'images/android-logo.png';
-    $receiver.text = 'Android Native';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda_2($receiver) {
-    $receiver.src = 'images/rxjava-logo.png';
-    $receiver.text = 'RxJava';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda_3($receiver) {
-    $receiver.src = 'images/javascript-logo.png';
-    $receiver.text = 'JavaScript';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda_4($receiver) {
-    $receiver.src = 'images/react-logo.png';
-    $receiver.text = 'React Native';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda_5($receiver) {
-    $receiver.src = 'images/unity-logo.png';
-    $receiver.text = 'Unity3D';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda_6($receiver) {
-    $receiver.text = 'Junit';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda$lambda_7($receiver) {
-    $receiver.src = 'images/mockito-logo.png';
-    $receiver.text = 'Mockito';
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda_3($receiver) {
-    chip($receiver, void 0, true, About$content$lambda$lambda$lambda$lambda);
-    chip($receiver, void 0, true, About$content$lambda$lambda$lambda$lambda_0);
-    chip($receiver, void 0, true, About$content$lambda$lambda$lambda$lambda_1);
-    chip($receiver, void 0, true, About$content$lambda$lambda$lambda$lambda_2);
-    chip($receiver, void 0, true, About$content$lambda$lambda$lambda$lambda_3);
-    chip($receiver, void 0, true, About$content$lambda$lambda$lambda$lambda_4);
-    chip($receiver, void 0, true, About$content$lambda$lambda$lambda$lambda_5);
-    chip($receiver, void 0, void 0, About$content$lambda$lambda$lambda$lambda_6);
-    chip($receiver, void 0, true, About$content$lambda$lambda$lambda$lambda_7);
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda_4($receiver) {
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda_5($receiver) {
-    $receiver.size_vux9f0$();
-    $receiver.title = 'Rithmio';
-    $receiver.supportingText = 'Mar 2016 \u2014 present';
-    var $receiver_0 = $receiver.mainElement;
-    var list = new List('');
-    list.item_ccvxaz$(new ListIem('-At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient.'));
-    list.item_ccvxaz$(new ListIem('-Rithmio EDGE: I designed a new architecture based on Flux style circular data streams that made the code base more testable and stable.'));
-    list.item_ccvxaz$(new ListIem('-Cadence Counter: I built a prototype app from the ground up that had a strict two-week window of completion. I was able to complete it in only a week giving the project an extra week for testing. '));
-    plus($receiver_0, list.mainElement);
-    list.mainElement;
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda_6($receiver) {
-    $receiver.size_vux9f0$();
-    $receiver.title = 'MeetBall';
-    $receiver.supportingText = 'Jun 2015 \u2014 Mar 2016';
-    var $receiver_0 = $receiver.mainElement;
-    var list = new List('');
-    list.item_ccvxaz$(new ListIem('-At MeetBall I was the sole Android developer took over code base from a contractor and quickly moved the code a more structured testable state.'));
-    list.item_ccvxaz$(new ListIem('-Integrated Beacon awareness into the app using the Radius Networks SDK'));
-    plus($receiver_0, list.mainElement);
-    list.mainElement;
-    return Unit;
-  }
-  function About$content$lambda$lambda$lambda_7($receiver) {
-    $receiver.title = 'Tinker Entertainment';
-    $receiver.supportingText = 'Sep 2014 \u2014 Nov 2014';
-    var $receiver_0 = $receiver.mainElement;
-    var list = new List('');
-    list.item_ccvxaz$(new ListIem('While defunct, I picked up this project for my friend\u2019s new company venture when his original developer dropped out. With the game\u2019s code base written in C# and using the Unity3D framework, I quickly adapted myself to the language and provided an initial product release.'));
-    plus($receiver_0, list.mainElement);
-    list.mainElement;
-    return Unit;
-  }
-  function About$content$lambda$lambda($receiver) {
-    $receiver.cell_jop4ru$(3, void 0, About$content$lambda$lambda$lambda);
-    $receiver.cellCard_oteltj$(6, void 0, void 0, About$content$lambda$lambda$lambda_0);
-    $receiver.cell_jop4ru$(3, void 0, About$content$lambda$lambda$lambda_1);
-    $receiver.cell_jop4ru$(1, void 0, About$content$lambda$lambda$lambda_2);
-    $receiver.cell_jop4ru$(10, void 0, About$content$lambda$lambda$lambda_3);
-    $receiver.cell_jop4ru$(1, void 0, About$content$lambda$lambda$lambda_4);
-    $receiver.cellCard_oteltj$(4, void 0, void 0, About$content$lambda$lambda$lambda_5);
-    $receiver.cellCard_oteltj$(4, void 0, void 0, About$content$lambda$lambda$lambda_6);
-    $receiver.cellCard_oteltj$(4, void 0, void 0, About$content$lambda$lambda$lambda_7);
-    return Unit;
-  }
-  function About$content$lambda($receiver) {
+  function Forums$content$lambda($receiver) {
     $receiver.setAttribute('style', " background: url('images/whoiam.jpg') center / cover; filter: alpha(opacity=60); padding: 10px;");
-    grid($receiver, void 0, About$content$lambda$lambda);
     return Unit;
   }
-  About.$metadata$ = {
+  Forums.$metadata$ = {
     kind: Kind_OBJECT,
-    simpleName: 'About',
+    simpleName: 'Forums',
     interfaces: [MdlContent]
   };
-  var About_instance = null;
-  function About_getInstance() {
-    if (About_instance === null) {
-      new About();
+  var Forums_instance = null;
+  function Forums_getInstance() {
+    if (Forums_instance === null) {
+      new Forums();
     }
-    return About_instance;
+    return Forums_instance;
   }
-  function Projects() {
-    Projects_instance = this;
-    this.content_omg0zy$_0 = content('Projects', void 0, Projects$content$lambda);
+  function MainPage() {
+    MainPage_instance = this;
+    this.content_mt7l9q$_0 = content('Pagina Principal', void 0, MainPage$content$lambda(this));
   }
-  Object.defineProperty(Projects.prototype, 'content', {
+  function MainPage$createPage$lambda$lambda$lambda($receiver) {
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.text = 'Foros';
+    $receiver.materialIcons = 'forum';
+    $receiver.href = 'forum.html';
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.title = 'Ingresar';
+    $receiver.buttonOne = new Dialog$Button('CERRAR', true, Color_getInstance().accent);
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
+    dialog($receiver, void 0, MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda);
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    $receiver.text = 'Ingresar';
+    $receiver.materialIcons = 'account_circle';
+    $receiver.onClick_fatjke$(MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda);
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    $receiver.title = 'Acerca de';
+    $receiver.content = 'Emmanuel Messulam';
+    $receiver.buttonOne = new Dialog$Button('CERRAR', true, Color_getInstance().accent);
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    dialog($receiver, void 0, MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0);
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda$lambda$lambda_1($receiver) {
+    $receiver.text = 'Acerca de';
+    $receiver.materialIcons = 'info';
+    $receiver.onClick_fatjke$(MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda_0);
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.link_g1rzco$(MainPage$createPage$lambda$lambda$lambda$lambda$lambda);
+    $receiver.link_g1rzco$(MainPage$createPage$lambda$lambda$lambda$lambda$lambda_0);
+    $receiver.link_g1rzco$(MainPage$createPage$lambda$lambda$lambda$lambda$lambda_1);
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda$lambda_0($receiver) {
+    var $receiver_0 = $receiver.mainElement;
+    var classId = 'drawer-header';
+    var $receiver_1 = document.createElement('header');
+    classType($receiver_1, classId);
+    var header = $receiver_1;
+    header.setAttribute('style', " background: url('images/whoiam.jpg') center / cover; padding: 10px;");
+    $receiver_0.append(header);
+    $receiver.nav_huf4ba$('navigation', MainPage$createPage$lambda$lambda$lambda$lambda);
+    return Unit;
+  }
+  function MainPage$createPage$lambda$lambda($receiver) {
+    $receiver.header_jktz5e$(Color_getInstance().primary, void 0, void 0, MainPage$createPage$lambda$lambda$lambda);
+    $receiver.drawer_pvsmkh$('drawer', void 0, MainPage$createPage$lambda$lambda$lambda_0);
+    return Unit;
+  }
+  function MainPage$createPage$lambda($receiver) {
+    $receiver.navigationLayout_d0ce5n$(MainPage_getInstance(), 'layout', MainPage$createPage$lambda$lambda);
+    return Unit;
+  }
+  MainPage.prototype.createPage = function () {
+    var mdlApp_0 = mdlApp(MainPage$createPage$lambda);
+  };
+  Object.defineProperty(MainPage.prototype, 'content', {
     get: function () {
-      return this.content_omg0zy$_0;
+      return this.content_mt7l9q$_0;
     }
   });
-  function Projects$content$lambda($receiver) {
+  function MainPage$createX$lambda$lambda$lambda($receiver) {
+    $receiver.title = 'Rithmio';
+    $receiver.content = 'At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient.';
+    $receiver.buttonOne = new Dialog$Button('Ir a foros', true, Color_getInstance().accent);
     return Unit;
   }
-  Projects.$metadata$ = {
+  function MainPage$createX$lambda$lambda($receiver) {
+    dialog($receiver, void 0, MainPage$createX$lambda$lambda$lambda);
+    return Unit;
+  }
+  function MainPage$createX$lambda(closure$images, closure$i, closure$titles, closure$supportingTexts) {
+    return function ($receiver) {
+      $receiver.size_vux9f0$();
+      $receiver.image = new Card$Image(closure$images[closure$i]);
+      $receiver.title = closure$titles[closure$i];
+      $receiver.supportingText = closure$supportingTexts[closure$i];
+      $receiver.button = new Card$Button('VER', Color_getInstance().accent, MainPage$createX$lambda$lambda);
+      return Unit;
+    };
+  }
+  MainPage.prototype.createX_0 = function ($receiver, lines, images, titles, supportingTexts) {
+    var tmp$;
+    tmp$ = lines * 6 | 0;
+    for (var i = 0; i < tmp$; i++) {
+      $receiver.cellCard_oteltj$(2, void 0, void 0, MainPage$createX$lambda(images, i, titles, supportingTexts));
+    }
+  };
+  var Array_0 = Array;
+  function MainPage$content$lambda$lambda(this$MainPage) {
+    return function ($receiver) {
+      var array = Array_0(20 * 6 | 0);
+      var tmp$;
+      tmp$ = array.length - 1 | 0;
+      for (var i = 0; i <= tmp$; i++) {
+        array[i] = 'images/laptop.jpg';
+      }
+      var images = array;
+      var array_0 = Array_0(20 * 6 | 0);
+      var tmp$_0;
+      tmp$_0 = array_0.length - 1 | 0;
+      for (var i_0 = 0; i_0 <= tmp$_0; i_0++) {
+        array_0[i_0] = 'Rithmio';
+      }
+      var titles = array_0;
+      var array_1 = Array_0(20 * 6 | 0);
+      var tmp$_1;
+      tmp$_1 = array_1.length - 1 | 0;
+      for (var i_1 = 0; i_1 <= tmp$_1; i_1++) {
+        array_1[i_1] = 'At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient.';
+      }
+      var supportingTexts = array_1;
+      this$MainPage.createX_0($receiver, 20, images, titles, supportingTexts);
+      return Unit;
+    };
+  }
+  function MainPage$content$lambda(this$MainPage) {
+    return function ($receiver) {
+      grid($receiver, void 0, MainPage$content$lambda$lambda(this$MainPage));
+      return Unit;
+    };
+  }
+  MainPage.$metadata$ = {
     kind: Kind_OBJECT,
-    simpleName: 'Projects',
+    simpleName: 'MainPage',
     interfaces: [MdlContent]
   };
-  var Projects_instance = null;
-  function Projects_getInstance() {
-    if (Projects_instance === null) {
-      new Projects();
+  var MainPage_instance = null;
+  function MainPage_getInstance() {
+    if (MainPage_instance === null) {
+      new MainPage();
     }
-    return Projects_instance;
+    return MainPage_instance;
   }
   MdlColor$Background.blueGrey = MdlColor$Background$blueGrey;
   MdlColor$Background.red = MdlColor$Background$red;
@@ -2967,11 +3253,19 @@ this['School-Web-Project'] = function (_, Kotlin) {
   });
   Card.Shadow = Card$Shadow;
   $$importsForInline$$['School-Web-Project'] = _;
+  Card.Image = Card$Image;
+  Card.Button = Card$Button;
   package$components.Card = Card;
   package$components.chip_pi6zr4$ = chip;
   Chip.ChipText = Chip$ChipText;
   Chip.ContactImage = Chip$ContactImage;
   package$components.Chip = Chip;
+  package$components.dialog_gnb9wv$ = dialog;
+  Object.defineProperty(Dialog, 'Companion', {
+    get: Dialog$Companion_getInstance
+  });
+  Dialog.Button = Dialog$Button;
+  package$components.Dialog = Dialog;
   _.plus_mh1xch$ = plus;
   package$components.list_tt4us9$ = list;
   package$components.List = List;
@@ -3005,19 +3299,36 @@ this['School-Web-Project'] = function (_, Kotlin) {
   _.span_rvhpk0$ = span_0;
   _.style_46n0ku$ = style;
   _.Img = Img;
-  var package$samplesite = _.samplesite || (_.samplesite = {});
-  package$samplesite.main_kand9s$ = main;
-  var package$pages = package$samplesite.pages || (package$samplesite.pages = {});
-  Object.defineProperty(package$pages, 'About', {
-    get: About_getInstance
+  var package$site = _.site || (_.site = {});
+  Object.defineProperty(package$site, 'Color', {
+    get: Color_getInstance
   });
-  Object.defineProperty(package$pages, 'Projects', {
-    get: Projects_getInstance
+  var package$pages = package$site.pages || (package$site.pages = {});
+  Object.defineProperty(package$pages, 'MAINPAGE_TITLE', {
+    get: function () {
+      return MAINPAGE_TITLE;
+    }
+  });
+  Object.defineProperty(package$pages, 'FORUM_TITLE', {
+    get: function () {
+      return FORUM_TITLE;
+    }
+  });
+  package$pages.main_kand9s$ = main;
+  var package$forumspage = package$pages.forumspage || (package$pages.forumspage = {});
+  Object.defineProperty(package$forumspage, 'Forums', {
+    get: Forums_getInstance
+  });
+  var package$mainpage = package$pages.mainpage || (package$pages.mainpage = {});
+  Object.defineProperty(package$mainpage, 'MainPage', {
+    get: MainPage_getInstance
   });
   Drawer.prototype.nav_huf4ba$$default = LayoutNav.prototype.nav_huf4ba$$default;
   Drawer.prototype.layoutTile_t2t2ot$$default = LayoutTile.prototype.layoutTile_t2t2ot$$default;
   Drawer.prototype.nav_huf4ba$ = LayoutNav.prototype.nav_huf4ba$;
   Drawer.prototype.layoutTile_t2t2ot$ = LayoutTile.prototype.layoutTile_t2t2ot$;
+  MAINPAGE_TITLE = 'Main';
+  FORUM_TITLE = 'Forum';
   main([]);
   Kotlin.defineModule('School-Web-Project', _);
   return _;
