@@ -51,6 +51,11 @@ class Dialog(cssClassId: String = "") {
                 mainElement.appendElement("a") {
                     classType("mdl-button mdl-js-button mdl-js-ripple-effect ${value.color}")
                     textContent = value.text.toUpperCase()
+
+                    if(value.href != null) {
+                        setAttribute("href", "${value.href}")
+                    }
+
                     mainElement.addEventListener("click",  { _: Event ->
                         value.onClick(this)
                         if(value.shouldClose) {
@@ -83,5 +88,6 @@ class Dialog(cssClassId: String = "") {
         isADialogAlreadyOpen = false
     }
 
-    data class Button(val text: String, val shouldClose: Boolean, val color: String, val onClick: Element.() -> Unit = {})
+    data class Button(val text: String, val shouldClose: Boolean, val href: String? = null, val color: String,
+                      val onClick: Element.() -> Unit = {})
 }

@@ -11,12 +11,12 @@ this['School-Web-Project'] = function (_, Kotlin) {
   var appendElement = Kotlin.kotlin.dom.appendElement_ldvnw0$;
   var PropertyMetadata = Kotlin.PropertyMetadata;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
+  var toString = Kotlin.toString;
   var createElement = Kotlin.kotlin.dom.createElement_7cgwi1$;
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
   var ensureNotNull = Kotlin.ensureNotNull;
   var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
-  var equals = Kotlin.equals;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
@@ -2088,6 +2088,9 @@ this['School-Web-Project'] = function (_, Kotlin) {
     return function ($receiver) {
       classType($receiver, 'mdl-button mdl-js-button mdl-js-ripple-effect ' + closure$value.color);
       $receiver.textContent = closure$value.text.toUpperCase();
+      if (closure$value.href != null) {
+        $receiver.setAttribute('href', toString(closure$value.href));
+      }
       this$Dialog.mainElement.addEventListener('click', Dialog$set_Dialog$buttonOne$lambda$lambda(closure$value, $receiver, this$Dialog));
       return Unit;
     };
@@ -2121,11 +2124,14 @@ this['School-Web-Project'] = function (_, Kotlin) {
     this.mainElement.remove();
     Dialog$Companion_getInstance().isADialogAlreadyOpen = false;
   };
-  function Dialog$Button(text, shouldClose, color, onClick) {
+  function Dialog$Button(text, shouldClose, href, color, onClick) {
+    if (href === void 0)
+      href = null;
     if (onClick === void 0)
       onClick = Dialog$Dialog$Button_init$lambda;
     this.text = text;
     this.shouldClose = shouldClose;
+    this.href = href;
     this.color = color;
     this.onClick = onClick;
   }
@@ -2144,27 +2150,31 @@ this['School-Web-Project'] = function (_, Kotlin) {
     return this.shouldClose;
   };
   Dialog$Button.prototype.component3 = function () {
-    return this.color;
+    return this.href;
   };
   Dialog$Button.prototype.component4 = function () {
+    return this.color;
+  };
+  Dialog$Button.prototype.component5 = function () {
     return this.onClick;
   };
-  Dialog$Button.prototype.copy_f42jb1$ = function (text, shouldClose, color, onClick) {
-    return new Dialog$Button(text === void 0 ? this.text : text, shouldClose === void 0 ? this.shouldClose : shouldClose, color === void 0 ? this.color : color, onClick === void 0 ? this.onClick : onClick);
+  Dialog$Button.prototype.copy_hy31vc$ = function (text, shouldClose, href, color, onClick) {
+    return new Dialog$Button(text === void 0 ? this.text : text, shouldClose === void 0 ? this.shouldClose : shouldClose, href === void 0 ? this.href : href, color === void 0 ? this.color : color, onClick === void 0 ? this.onClick : onClick);
   };
   Dialog$Button.prototype.toString = function () {
-    return 'Button(text=' + Kotlin.toString(this.text) + (', shouldClose=' + Kotlin.toString(this.shouldClose)) + (', color=' + Kotlin.toString(this.color)) + (', onClick=' + Kotlin.toString(this.onClick)) + ')';
+    return 'Button(text=' + Kotlin.toString(this.text) + (', shouldClose=' + Kotlin.toString(this.shouldClose)) + (', href=' + Kotlin.toString(this.href)) + (', color=' + Kotlin.toString(this.color)) + (', onClick=' + Kotlin.toString(this.onClick)) + ')';
   };
   Dialog$Button.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.text) | 0;
     result = result * 31 + Kotlin.hashCode(this.shouldClose) | 0;
+    result = result * 31 + Kotlin.hashCode(this.href) | 0;
     result = result * 31 + Kotlin.hashCode(this.color) | 0;
     result = result * 31 + Kotlin.hashCode(this.onClick) | 0;
     return result;
   };
   Dialog$Button.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.text, other.text) && Kotlin.equals(this.shouldClose, other.shouldClose) && Kotlin.equals(this.color, other.color) && Kotlin.equals(this.onClick, other.onClick)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.text, other.text) && Kotlin.equals(this.shouldClose, other.shouldClose) && Kotlin.equals(this.href, other.href) && Kotlin.equals(this.color, other.color) && Kotlin.equals(this.onClick, other.onClick)))));
   };
   function Dialog_init$lambda(closure$cssClassId) {
     return function ($receiver) {
@@ -2285,8 +2295,6 @@ this['School-Web-Project'] = function (_, Kotlin) {
   };
   MdlComponent$htmlPram$ObjectLiteral.prototype.set_0 = function (name, value) {
     this.closure$parent.setAttribute(name, value.toString());
-    if (equals(name, 'href'))
-      this.closure$parent.setAttribute('target', '_blank');
   };
   MdlComponent$htmlPram$ObjectLiteral.$metadata$ = {
     kind: Kind_CLASS,
@@ -2953,7 +2961,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   }
   function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
     $receiver.title = 'Ingresar';
-    $receiver.buttonOne = new Dialog$Button('CERRAR', true, Color_getInstance().accent);
+    $receiver.buttonOne = new Dialog$Button('CERRAR', true, void 0, Color_getInstance().accent);
     return Unit;
   }
   function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
@@ -2969,7 +2977,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
     $receiver.title = 'Acerca de';
     $receiver.content = 'Emmanuel Messulam';
-    $receiver.buttonOne = new Dialog$Button('CERRAR', true, Color_getInstance().accent);
+    $receiver.buttonOne = new Dialog$Button('CERRAR', true, void 0, Color_getInstance().accent);
     return Unit;
   }
   function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
@@ -3019,7 +3027,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   function MainPage$createX$lambda$lambda$lambda($receiver) {
     $receiver.title = 'Rithmio';
     $receiver.content = 'At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient.';
-    $receiver.buttonOne = new Dialog$Button('Ir a foros', true, Color_getInstance().accent);
+    $receiver.buttonOne = new Dialog$Button('Ir a foros', false, 'forum.html', Color_getInstance().accent);
     return Unit;
   }
   function MainPage$createX$lambda$lambda($receiver) {

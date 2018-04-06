@@ -34,7 +34,7 @@ object MainPage : MdlContent {
                             onClick {
                                 dialog {
                                     title = "Ingresar"
-                                    buttonOne = Dialog.Button("CERRAR", true, Color.accent)
+                                    buttonOne = Dialog.Button("CERRAR", true, color =  Color.accent)
                                 }
                             }
                         }
@@ -45,7 +45,7 @@ object MainPage : MdlContent {
                                 dialog {
                                     title = "Acerca de"
                                     content = "Emmanuel Messulam"
-                                    buttonOne = Dialog.Button("CERRAR", true, Color.accent)
+                                    buttonOne = Dialog.Button("CERRAR", true, color = Color.accent)
                                 }
                             }
                         }
@@ -75,7 +75,8 @@ object MainPage : MdlContent {
                     dialog {
                         title = "Rithmio"
                         content = "At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient."
-                        buttonOne = Dialog.Button("Ir a foros", true, Color.accent)
+                        buttonOne = Dialog.Button("Ir a foros", false, "forum.html",
+                                color = Color.accent)
                     }
                 }
             }

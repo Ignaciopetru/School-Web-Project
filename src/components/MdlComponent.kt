@@ -33,7 +33,6 @@ abstract class MdlComponent(tag: String, classType: String, cssClassId: String =
 
         private fun set(name: String, value: T) {
             parent.setAttribute(name, "$value")
-            if (name == "href") parent.setAttribute("target" ,"_blank")
         }
     }
 
