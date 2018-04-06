@@ -52,7 +52,7 @@ class Card(cssClassId: String = "", shadow: Shadow = Card.Shadow.DP2) : MdlCompo
                 mainElement.appendElement("a") {
                     classType("mdl-button mdl-js-button mdl-js-ripple-effect ${value.color}")
                     textContent = value.text
-                    mainElement.addEventListener("click",  { _: Event -> value.onClick.invoke(this) })
+                    addEventListener("click",  { _: Event -> value.onClick.invoke(this) })
                 }
             } else {
                 mainElement.getElementsByClassName("mdl-button")[0]?.remove()
