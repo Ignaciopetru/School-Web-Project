@@ -11,8 +11,8 @@ this['School-Web-Project'] = function (_, Kotlin) {
   var appendElement = Kotlin.kotlin.dom.appendElement_ldvnw0$;
   var PropertyMetadata = Kotlin.PropertyMetadata;
   var Kind_OBJECT = Kotlin.Kind.OBJECT;
-  var toString = Kotlin.toString;
   var createElement = Kotlin.kotlin.dom.createElement_7cgwi1$;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
   var defineInlineFunction = Kotlin.defineInlineFunction;
   var wrapFunction = Kotlin.wrapFunction;
   var ensureNotNull = Kotlin.ensureNotNull;
@@ -1782,11 +1782,11 @@ this['School-Web-Project'] = function (_, Kotlin) {
       return Unit;
     };
   }
-  function Card$set_Card$button$lambda(closure$value, this$Card) {
+  function Card$set_Card$button$lambda(closure$value) {
     return function ($receiver) {
       classType($receiver, 'mdl-button mdl-js-button mdl-js-ripple-effect ' + closure$value.color);
       $receiver.textContent = closure$value.text;
-      this$Card.mainElement.addEventListener('click', Card$set_Card$button$lambda$lambda(closure$value, $receiver));
+      $receiver.addEventListener('click', Card$set_Card$button$lambda$lambda(closure$value, $receiver));
       return Unit;
     };
   }
@@ -1797,7 +1797,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
     set: function (value) {
       var tmp$;
       if (value != null) {
-        appendElement(this.mainElement, 'a', Card$set_Card$button$lambda(value, this));
+        appendElement(this.mainElement, 'a', Card$set_Card$button$lambda(value));
       }
        else {
         (tmp$ = this.mainElement.getElementsByClassName('mdl-button')[0]) != null ? (tmp$.remove(), Unit) : null;
@@ -2023,7 +2023,9 @@ this['School-Web-Project'] = function (_, Kotlin) {
     this.open_0();
     this.title_2eziy8$_0 = '';
     this.content_rj5df5$_0 = '';
-    this.buttonOne_x4mffw$_0 = null;
+    this.actionsSection_f3upp8$_0 = lazy(Dialog$actionsSection$lambda(this));
+    this.buttonPrimary_hakxfc$_0 = null;
+    this.buttonSecondary_qbz9qe$_0 = null;
   }
   function Dialog$Companion() {
     Dialog$Companion_instance = this;
@@ -2075,40 +2077,56 @@ this['School-Web-Project'] = function (_, Kotlin) {
       $receiver.append(div);
     }
   });
-  function Dialog$set_Dialog$buttonOne$lambda$lambda(closure$value, this$, this$Dialog) {
+  Object.defineProperty(Dialog.prototype, 'actionsSection_0', {
+    get: function () {
+      return this.actionsSection_f3upp8$_0.value;
+    }
+  });
+  Object.defineProperty(Dialog.prototype, 'buttonPrimary', {
+    get: function () {
+      return this.buttonPrimary_hakxfc$_0;
+    },
+    set: function (value) {
+      this.buttonSetter_0(value);
+    }
+  });
+  Object.defineProperty(Dialog.prototype, 'buttonSecondary', {
+    get: function () {
+      return this.buttonSecondary_qbz9qe$_0;
+    },
+    set: function (value) {
+      this.buttonSetter_0(value);
+    }
+  });
+  function Dialog$buttonSetter$lambda$lambda(closure$value, this$, this$Dialog) {
     return function (f) {
       closure$value.onClick(this$);
       if (closure$value.shouldClose) {
         this$Dialog.close_0();
       }
+      if (closure$value.href != null) {
+        window.location.href = closure$value.href;
+      }
       return Unit;
     };
   }
-  function Dialog$set_Dialog$buttonOne$lambda(closure$value, this$Dialog) {
+  function Dialog$buttonSetter$lambda(closure$value, this$Dialog) {
     return function ($receiver) {
       classType($receiver, 'mdl-button mdl-js-button mdl-js-ripple-effect ' + closure$value.color);
       $receiver.textContent = closure$value.text.toUpperCase();
-      if (closure$value.href != null) {
-        $receiver.setAttribute('href', toString(closure$value.href));
-      }
-      this$Dialog.mainElement.addEventListener('click', Dialog$set_Dialog$buttonOne$lambda$lambda(closure$value, $receiver, this$Dialog));
+      $receiver.addEventListener('click', Dialog$buttonSetter$lambda$lambda(closure$value, $receiver, this$Dialog));
       return Unit;
     };
   }
-  Object.defineProperty(Dialog.prototype, 'buttonOne', {
-    get: function () {
-      return this.buttonOne_x4mffw$_0;
-    },
-    set: function (value) {
-      var tmp$;
-      if (value != null) {
-        appendElement(this.mainElement, 'a', Dialog$set_Dialog$buttonOne$lambda(value, this));
-      }
-       else {
-        (tmp$ = this.mainElement.getElementsByClassName('mdl-button')[0]) != null ? (tmp$.remove(), Unit) : null;
-      }
+  Dialog.prototype.buttonSetter_0 = function (value) {
+    var tmp$;
+    if (value != null) {
+      appendElement(this.actionsSection_0, 'button', Dialog$buttonSetter$lambda(value, this));
     }
-  });
+     else {
+      (tmp$ = this.mainElement.getElementsByClassName('mdl-button')[0]) != null ? (tmp$.remove(), Unit) : null;
+    }
+  };
   Dialog.prototype.open_0 = function () {
     var tmp$;
     if (!Dialog$Companion_getInstance().isADialogAlreadyOpen) {
@@ -2127,6 +2145,8 @@ this['School-Web-Project'] = function (_, Kotlin) {
   function Dialog$Button(text, shouldClose, href, color, onClick) {
     if (href === void 0)
       href = null;
+    if (color === void 0)
+      color = '';
     if (onClick === void 0)
       onClick = Dialog$Dialog$Button_init$lambda;
     this.text = text;
@@ -2143,6 +2163,11 @@ this['School-Web-Project'] = function (_, Kotlin) {
     simpleName: 'Button',
     interfaces: []
   };
+  function Dialog$Dialog$Button_init($this) {
+    $this = $this || Object.create(Dialog$Button.prototype);
+    Dialog$Button.call($this, 'CLOSE', true);
+    return $this;
+  }
   Dialog$Button.prototype.component1 = function () {
     return this.text;
   };
@@ -2180,6 +2205,17 @@ this['School-Web-Project'] = function (_, Kotlin) {
     return function ($receiver) {
       classType($receiver, closure$cssClassId + ' backdrop mdl-dialog');
       return Unit;
+    };
+  }
+  function Dialog$actionsSection$lambda(this$Dialog) {
+    return function () {
+      var $receiver = this$Dialog.mainElement;
+      var classId = 'mdl-dialog__actions';
+      var $receiver_0 = document.createElement('div');
+      classType($receiver_0, classId);
+      var div = $receiver_0;
+      $receiver.append(div);
+      return div;
     };
   }
   Dialog.$metadata$ = {
@@ -2961,7 +2997,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   }
   function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
     $receiver.title = 'Ingresar';
-    $receiver.buttonOne = new Dialog$Button('CERRAR', true, void 0, Color_getInstance().accent);
+    $receiver.buttonSecondary = Dialog$Dialog$Button_init();
     return Unit;
   }
   function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
@@ -2977,7 +3013,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
     $receiver.title = 'Acerca de';
     $receiver.content = 'Emmanuel Messulam';
-    $receiver.buttonOne = new Dialog$Button('CERRAR', true, void 0, Color_getInstance().accent);
+    $receiver.buttonSecondary = Dialog$Dialog$Button_init();
     return Unit;
   }
   function MainPage$createPage$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
@@ -3027,7 +3063,8 @@ this['School-Web-Project'] = function (_, Kotlin) {
   function MainPage$createX$lambda$lambda$lambda($receiver) {
     $receiver.title = 'Rithmio';
     $receiver.content = 'At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient.';
-    $receiver.buttonOne = new Dialog$Button('Ir a foros', false, 'forum.html', Color_getInstance().accent);
+    $receiver.buttonSecondary = Dialog$Dialog$Button_init();
+    $receiver.buttonPrimary = new Dialog$Button('Ir a foros', false, 'forum.html', Color_getInstance().accent);
     return Unit;
   }
   function MainPage$createX$lambda$lambda($receiver) {
@@ -3272,6 +3309,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   Object.defineProperty(Dialog, 'Companion', {
     get: Dialog$Companion_getInstance
   });
+  Dialog.Button_init = Dialog$Dialog$Button_init;
   Dialog.Button = Dialog$Button;
   package$components.Dialog = Dialog;
   _.plus_mh1xch$ = plus;

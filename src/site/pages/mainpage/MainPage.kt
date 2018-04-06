@@ -8,7 +8,6 @@ import components.layout.grid
 import header
 import mdlApp
 import site.Color
-import site.pages.main
 
 object MainPage : MdlContent {
 
@@ -34,7 +33,7 @@ object MainPage : MdlContent {
                             onClick {
                                 dialog {
                                     title = "Ingresar"
-                                    buttonOne = Dialog.Button("CERRAR", true, color =  Color.accent)
+                                    buttonSecondary = Dialog.Button()
                                 }
                             }
                         }
@@ -45,7 +44,7 @@ object MainPage : MdlContent {
                                 dialog {
                                     title = "Acerca de"
                                     content = "Emmanuel Messulam"
-                                    buttonOne = Dialog.Button("CERRAR", true, color = Color.accent)
+                                    buttonSecondary = Dialog.Button()
                                 }
                             }
                         }
@@ -75,7 +74,8 @@ object MainPage : MdlContent {
                     dialog {
                         title = "Rithmio"
                         content = "At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient."
-                        buttonOne = Dialog.Button("Ir a foros", false, "forum.html",
+                        buttonSecondary = Dialog.Button()
+                        buttonPrimary = Dialog.Button("Ir a foros", false, "forum.html",
                                 color = Color.accent)
                     }
                 }

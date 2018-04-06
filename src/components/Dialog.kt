@@ -7,6 +7,7 @@ import org.w3c.dom.Element
 import org.w3c.dom.events.Event
 import org.w3c.dom.get
 import kotlin.browser.document
+import kotlin.browser.window
 import kotlin.dom.appendElement
 import kotlin.dom.createElement
 
@@ -45,28 +46,38 @@ class Dialog(cssClassId: String = "") {
             mainElement.div("mdl-dialog__content") { appendElement("p") { textContent = value } }
         }
 
-    var buttonOne: Button? = null
-        set(value) {
-            if(value != null) {
-                mainElement.appendElement("a") {
-                    classType("mdl-button mdl-js-button mdl-js-ripple-effect ${value.color}")
-                    textContent = value.text.toUpperCase()
+    private val actionsSection: Element by lazy {
+        mainElement.div("mdl-dialog__actions") {}
+    }
 
-                    if(value.href != null) {
-                        setAttribute("href", "${value.href}")
+    var buttonPrimary: Button? = null
+        set(value) = buttonSetter(value)
+
+    var buttonSecondary: Button? = null
+        set(value) = buttonSetter(value)
+
+    private fun buttonSetter(value: Button?) {
+        if(value != null) {
+            actionsSection.appendElement("button") {
+                classType("mdl-button mdl-js-button mdl-js-ripple-effect ${value.color}")
+                textContent = value.text.toUpperCase()
+
+                addEventListener("click",  { _: Event ->
+                    value.onClick(this)
+
+                    if(value.shouldClose) {
+                        close()
                     }
 
-                    mainElement.addEventListener("click",  { _: Event ->
-                        value.onClick(this)
-                        if(value.shouldClose) {
-                            close()
-                        }
-                    })
-                }
-            } else {
-                mainElement.getElementsByClassName("mdl-button")[0]?.remove()
+                    if(value.href != null) {
+                        window.location.href = value.href
+                    }
+                })
             }
+        } else {
+            mainElement.getElementsByClassName("mdl-button")[0]?.remove()
         }
+    }
 
     private fun open() {
         if(!isADialogAlreadyOpen) {
@@ -88,6 +99,9 @@ class Dialog(cssClassId: String = "") {
         isADialogAlreadyOpen = false
     }
 
-    data class Button(val text: String, val shouldClose: Boolean, val href: String? = null, val color: String,
-                      val onClick: Element.() -> Unit = {})
+    data class Button(val text: String, val shouldClose: Boolean, val href: String? = null, val color: String = "",
+                      val onClick: Element.() -> Unit = {}) {
+        constructor() : this("CLOSE", true)
+    }
+
 }
