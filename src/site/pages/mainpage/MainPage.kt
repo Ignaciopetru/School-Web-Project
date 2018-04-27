@@ -8,6 +8,8 @@ import components.layout.grid
 import header
 import mdlApp
 import site.Color
+import kotlin.js.Math
+import kotlin.math.ceil
 
 object MainPage : MdlContent {
 
@@ -56,20 +58,24 @@ object MainPage : MdlContent {
 
     override val content = content("Pagina Principal") {
         grid {
-            val images = Array (20*6) {"images/laptop.jpg"}
-            val titles = Array (20*6) {"Rithmio"}
-            val supportingTexts = Array (20*6) {"At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient."}
-            createX(20, images, titles, supportingTexts)
+            createX(Array(50) {
+                MainPageCard("images/weapons/$it.jpg", "Rithmio",
+                        """
+                        At Rithmio I Introduced new technologies like
+                        Kotlin and RxJava which have helped to make the
+                        team faster and more efficient.
+                        """)
+            })
         }
     }
 
-    private fun Grid.createX(lines: Int, images: Array<String>, titles: Array<String>, supportingTexts: Array<String>) {
-        for (i in 0 until lines*6) {
+    private fun Grid.createX(mainPageCards: Array<MainPageCard>) {
+        for (mainPageCard in mainPageCards) {
             cellCard(2) {
                 size()
-                image = Card.Image(images[i])
-                title = titles[i]
-                supportingText = supportingTexts[i]
+                image = Card.Image(mainPageCard.image)
+                title = mainPageCard.title
+                supportingText = mainPageCard.supportingText
                 button = Card.Button("VER", Color.accent) {
                     dialog {
                         title = "Rithmio"
@@ -82,5 +88,7 @@ object MainPage : MdlContent {
             }
         }
     }
+
+    private data class MainPageCard(val image: String, val title: String, val supportingText: String)
 }
 
