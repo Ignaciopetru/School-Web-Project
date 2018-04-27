@@ -62,3 +62,9 @@ dialog {
 a:hover {
     cursor:pointer;
 }
+
+img.center-cropped-image {
+  height: 100px;
+  width: 100%;
+  object-fit: cover;
+}

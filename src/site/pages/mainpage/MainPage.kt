@@ -73,7 +73,7 @@ object MainPage : MdlContent {
         for (mainPageCard in mainPageCards) {
             cellCard(2) {
                 size()
-                image = Card.Image(mainPageCard.image)
+                image = Card.Image(mainPageCard.image, cssClassNames = "center-cropped-image")
                 title = mainPageCard.title
                 supportingText = mainPageCard.supportingText
                 button = Card.Button("VER", Color.accent) {

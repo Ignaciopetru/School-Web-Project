@@ -1816,7 +1816,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
         var $receiver_0 = document.createElement('div');
         classType($receiver_0, classId);
         var div = $receiver_0;
-        var img = new Img('card_helper');
+        var img = new Img('card_helper ' + value.cssClassNames);
         img.src = value.url;
         img.alt = value.alt;
         div.append(img.mainElement);
@@ -1861,11 +1861,14 @@ this['School-Web-Project'] = function (_, Kotlin) {
       $receiver.append(div);
     }
   });
-  function Card$Image(url, alt) {
+  function Card$Image(url, alt, cssClassNames) {
     if (alt === void 0)
       alt = '';
+    if (cssClassNames === void 0)
+      cssClassNames = '';
     this.url = url;
     this.alt = alt;
+    this.cssClassNames = cssClassNames;
   }
   Card$Image.$metadata$ = {
     kind: Kind_CLASS,
@@ -1878,20 +1881,24 @@ this['School-Web-Project'] = function (_, Kotlin) {
   Card$Image.prototype.component2 = function () {
     return this.alt;
   };
-  Card$Image.prototype.copy_puj7f4$ = function (url, alt) {
-    return new Card$Image(url === void 0 ? this.url : url, alt === void 0 ? this.alt : alt);
+  Card$Image.prototype.component3 = function () {
+    return this.cssClassNames;
+  };
+  Card$Image.prototype.copy_6hosri$ = function (url, alt, cssClassNames) {
+    return new Card$Image(url === void 0 ? this.url : url, alt === void 0 ? this.alt : alt, cssClassNames === void 0 ? this.cssClassNames : cssClassNames);
   };
   Card$Image.prototype.toString = function () {
-    return 'Image(url=' + Kotlin.toString(this.url) + (', alt=' + Kotlin.toString(this.alt)) + ')';
+    return 'Image(url=' + Kotlin.toString(this.url) + (', alt=' + Kotlin.toString(this.alt)) + (', cssClassNames=' + Kotlin.toString(this.cssClassNames)) + ')';
   };
   Card$Image.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.url) | 0;
     result = result * 31 + Kotlin.hashCode(this.alt) | 0;
+    result = result * 31 + Kotlin.hashCode(this.cssClassNames) | 0;
     return result;
   };
   Card$Image.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.url, other.url) && Kotlin.equals(this.alt, other.alt)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.url, other.url) && Kotlin.equals(this.alt, other.alt) && Kotlin.equals(this.cssClassNames, other.cssClassNames)))));
   };
   function Card$Button(text, color, onClick) {
     this.text = text;
@@ -3074,7 +3081,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   function MainPage$createX$lambda(closure$mainPageCard) {
     return function ($receiver) {
       $receiver.size_vux9f0$();
-      $receiver.image = new Card$Image(closure$mainPageCard.image);
+      $receiver.image = new Card$Image(closure$mainPageCard.image, void 0, 'center-cropped-image');
       $receiver.title = closure$mainPageCard.title;
       $receiver.supportingText = closure$mainPageCard.supportingText;
       $receiver.button = new Card$Button('VER', Color_getInstance().accent, MainPage$createX$lambda$lambda);
