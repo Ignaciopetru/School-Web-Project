@@ -1816,7 +1816,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
         var $receiver_0 = document.createElement('div');
         classType($receiver_0, classId);
         var div = $receiver_0;
-        var img = new Img('card_helper');
+        var img = new Img('card_helper ' + value.cssClassNames);
         img.src = value.url;
         img.alt = value.alt;
         div.append(img.mainElement);
@@ -1861,11 +1861,14 @@ this['School-Web-Project'] = function (_, Kotlin) {
       $receiver.append(div);
     }
   });
-  function Card$Image(url, alt) {
+  function Card$Image(url, alt, cssClassNames) {
     if (alt === void 0)
       alt = '';
+    if (cssClassNames === void 0)
+      cssClassNames = '';
     this.url = url;
     this.alt = alt;
+    this.cssClassNames = cssClassNames;
   }
   Card$Image.$metadata$ = {
     kind: Kind_CLASS,
@@ -1878,20 +1881,24 @@ this['School-Web-Project'] = function (_, Kotlin) {
   Card$Image.prototype.component2 = function () {
     return this.alt;
   };
-  Card$Image.prototype.copy_puj7f4$ = function (url, alt) {
-    return new Card$Image(url === void 0 ? this.url : url, alt === void 0 ? this.alt : alt);
+  Card$Image.prototype.component3 = function () {
+    return this.cssClassNames;
+  };
+  Card$Image.prototype.copy_6hosri$ = function (url, alt, cssClassNames) {
+    return new Card$Image(url === void 0 ? this.url : url, alt === void 0 ? this.alt : alt, cssClassNames === void 0 ? this.cssClassNames : cssClassNames);
   };
   Card$Image.prototype.toString = function () {
-    return 'Image(url=' + Kotlin.toString(this.url) + (', alt=' + Kotlin.toString(this.alt)) + ')';
+    return 'Image(url=' + Kotlin.toString(this.url) + (', alt=' + Kotlin.toString(this.alt)) + (', cssClassNames=' + Kotlin.toString(this.cssClassNames)) + ')';
   };
   Card$Image.prototype.hashCode = function () {
     var result = 0;
     result = result * 31 + Kotlin.hashCode(this.url) | 0;
     result = result * 31 + Kotlin.hashCode(this.alt) | 0;
+    result = result * 31 + Kotlin.hashCode(this.cssClassNames) | 0;
     return result;
   };
   Card$Image.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.url, other.url) && Kotlin.equals(this.alt, other.alt)))));
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.url, other.url) && Kotlin.equals(this.alt, other.alt) && Kotlin.equals(this.cssClassNames, other.cssClassNames)))));
   };
   function Card$Button(text, color, onClick) {
     this.text = text;
@@ -3071,48 +3078,69 @@ this['School-Web-Project'] = function (_, Kotlin) {
     dialog($receiver, void 0, MainPage$createX$lambda$lambda$lambda);
     return Unit;
   }
-  function MainPage$createX$lambda(closure$images, closure$i, closure$titles, closure$supportingTexts) {
+  function MainPage$createX$lambda(closure$mainPageCard) {
     return function ($receiver) {
       $receiver.size_vux9f0$();
-      $receiver.image = new Card$Image(closure$images[closure$i]);
-      $receiver.title = closure$titles[closure$i];
-      $receiver.supportingText = closure$supportingTexts[closure$i];
+      $receiver.image = new Card$Image(closure$mainPageCard.image, void 0, 'center-cropped-image');
+      $receiver.title = closure$mainPageCard.title;
+      $receiver.supportingText = closure$mainPageCard.supportingText;
       $receiver.button = new Card$Button('VER', Color_getInstance().accent, MainPage$createX$lambda$lambda);
       return Unit;
     };
   }
-  MainPage.prototype.createX_0 = function ($receiver, lines, images, titles, supportingTexts) {
+  MainPage.prototype.createX_0 = function ($receiver, mainPageCards) {
     var tmp$;
-    tmp$ = lines * 6 | 0;
-    for (var i = 0; i < tmp$; i++) {
-      $receiver.cellCard_oteltj$(2, void 0, void 0, MainPage$createX$lambda(images, i, titles, supportingTexts));
+    for (tmp$ = 0; tmp$ !== mainPageCards.length; ++tmp$) {
+      var mainPageCard = mainPageCards[tmp$];
+      $receiver.cellCard_oteltj$(2, void 0, void 0, MainPage$createX$lambda(mainPageCard));
     }
+  };
+  function MainPage$MainPageCard(image, title, supportingText) {
+    this.image = image;
+    this.title = title;
+    this.supportingText = supportingText;
+  }
+  MainPage$MainPageCard.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MainPageCard',
+    interfaces: []
+  };
+  MainPage$MainPageCard.prototype.component1 = function () {
+    return this.image;
+  };
+  MainPage$MainPageCard.prototype.component2 = function () {
+    return this.title;
+  };
+  MainPage$MainPageCard.prototype.component3 = function () {
+    return this.supportingText;
+  };
+  MainPage$MainPageCard.prototype.copy_6hosri$ = function (image, title, supportingText) {
+    return new MainPage$MainPageCard(image === void 0 ? this.image : image, title === void 0 ? this.title : title, supportingText === void 0 ? this.supportingText : supportingText);
+  };
+  MainPage$MainPageCard.prototype.toString = function () {
+    return 'MainPageCard(image=' + Kotlin.toString(this.image) + (', title=' + Kotlin.toString(this.title)) + (', supportingText=' + Kotlin.toString(this.supportingText)) + ')';
+  };
+  MainPage$MainPageCard.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.image) | 0;
+    result = result * 31 + Kotlin.hashCode(this.title) | 0;
+    result = result * 31 + Kotlin.hashCode(this.supportingText) | 0;
+    return result;
+  };
+  MainPage$MainPageCard.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.image, other.image) && Kotlin.equals(this.title, other.title) && Kotlin.equals(this.supportingText, other.supportingText)))));
   };
   var Array_0 = Array;
   function MainPage$content$lambda$lambda(this$MainPage) {
     return function ($receiver) {
-      var array = Array_0(20 * 6 | 0);
-      var tmp$;
-      tmp$ = array.length - 1 | 0;
-      for (var i = 0; i <= tmp$; i++) {
-        array[i] = 'images/laptop.jpg';
-      }
-      var images = array;
-      var array_0 = Array_0(20 * 6 | 0);
+      var tmp$ = this$MainPage;
+      var array = Array_0(50);
       var tmp$_0;
-      tmp$_0 = array_0.length - 1 | 0;
-      for (var i_0 = 0; i_0 <= tmp$_0; i_0++) {
-        array_0[i_0] = 'Rithmio';
+      tmp$_0 = array.length - 1 | 0;
+      for (var i = 0; i <= tmp$_0; i++) {
+        array[i] = new MainPage$MainPageCard('images/weapons/' + i + '.jpg', 'Rithmio', '\n                        At Rithmio I Introduced new technologies like\n                        Kotlin and RxJava which have helped to make the\n                        team faster and more efficient.\n                        ');
       }
-      var titles = array_0;
-      var array_1 = Array_0(20 * 6 | 0);
-      var tmp$_1;
-      tmp$_1 = array_1.length - 1 | 0;
-      for (var i_1 = 0; i_1 <= tmp$_1; i_1++) {
-        array_1[i_1] = 'At Rithmio I Introduced new technologies like Kotlin and RxJava which have helped to make the team faster and more efficient.';
-      }
-      var supportingTexts = array_1;
-      this$MainPage.createX_0($receiver, 20, images, titles, supportingTexts);
+      tmp$.createX_0($receiver, array);
       return Unit;
     };
   }

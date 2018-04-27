@@ -7,9 +7,8 @@ import img
 import org.w3c.dom.Element
 import org.w3c.dom.events.Event
 import org.w3c.dom.get
-import kotlin.browser.document
+import style
 import kotlin.dom.appendElement
-import kotlin.dom.removeClass
 
 fun Element.card(cssClassId: String = "", shadow: Card.Shadow = Card.Shadow.DP2, init: Card.() -> Unit): Element {
     val card = Card(cssClassId, shadow)
@@ -62,7 +61,7 @@ class Card(cssClassId: String = "", shadow: Shadow = Card.Shadow.DP2) : MdlCompo
     var image: Image? = null
         set(value) {
             if(value != null) {
-                mainElement.div("mdl-card__media") { img("card_helper") {
+                mainElement.div("mdl-card__media") { img("card_helper ${value.cssClassNames}") {
                     src = value.url
                     alt = value.alt
                 } }
@@ -81,7 +80,7 @@ class Card(cssClassId: String = "", shadow: Shadow = Card.Shadow.DP2) : MdlCompo
             mainElement.div("mdl-card__supporting-text") { textContent = value }
         }
 
-    data class Image(val url: String, val alt: String = "")
+    data class Image(val url: String, val alt: String = "", val cssClassNames: String = "")
 
     data class Button(val text: String, val color: String, val onClick: Element.() -> Unit )
 
