@@ -5,9 +5,11 @@ import components.layout.Grid
 import components.layout.grid
 import components.layout.navigationlayout.MdlContent
 import components.layout.navigationlayout.content
+import div
 import header
 import mdlApp
 import site.Color
+import kotlin.dom.appendElement
 
 object Forums : MdlContent {
     fun createPage() {
@@ -55,7 +57,7 @@ object Forums : MdlContent {
 
     override val content = content("Foros") {
         grid {
-            createX(Array(50) {
+            createX(Array(2) {
                 MainPageCard("Tema",
                         """
                         Aca va una corta explicacion sobre
@@ -63,6 +65,29 @@ object Forums : MdlContent {
                         que este texto sea mas largo una linea
                         mas va a bastar creo
                         """)
+            })
+
+            append(cellCard(4) {
+                size()
+                title = "Añadir tema"
+                supportingText = "Aca va una corta explicacion sobre la cosa que se va a hablar pero necesito que este texto sea mas largo una linea mas va a bastar creo"
+                button = Card.Button("sdfsdf", Color.accent) {
+                    dialog {
+                        title = "Nuevo"
+                        htmlContent = div {
+                            innerHTML = """
+                                 <form action="/nuevotema.php" method="get">
+                                      Tema:${'\n'}<input type="text" name="tema"><br>
+                                      Descripción:${'\n'}<input type="text" name="desc"><br>
+                                      <input type="submit" value="Enviar">
+                                 </form>
+                                """
+                        }
+                        //buttonSecondary = Dialog.Button()
+                        //buttonPrimary = Dialog.Button("Añadir", false, "nuevotema.php?tema=",
+                        //        color = Color.accent)
+                    }
+                }
             })
         }
     }

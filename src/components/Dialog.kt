@@ -46,6 +46,11 @@ class Dialog(cssClassId: String = "") {
             mainElement.div("mdl-dialog__content") { appendElement("p") { textContent = value } }
         }
 
+    var htmlContent: Element? = null
+        set(value) {
+            mainElement.div("mdl-dialog__content") { append(value) }
+        }
+
     private val actionsSection: Element by lazy {
         mainElement.div("mdl-dialog__actions") {}
     }

@@ -2030,6 +2030,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
     this.open_0();
     this.title_2eziy8$_0 = '';
     this.content_rj5df5$_0 = '';
+    this.htmlContent_piaa92$_0 = null;
     this.actionsSection_f3upp8$_0 = lazy(Dialog$actionsSection$lambda(this));
     this.buttonPrimary_hakxfc$_0 = null;
     this.buttonSecondary_qbz9qe$_0 = null;
@@ -2081,6 +2082,20 @@ this['School-Web-Project'] = function (_, Kotlin) {
       classType($receiver_0, classId);
       var div = $receiver_0;
       appendElement(div, 'p', Dialog$set_Dialog$content$lambda$lambda(value));
+      $receiver.append(div);
+    }
+  });
+  Object.defineProperty(Dialog.prototype, 'htmlContent', {
+    get: function () {
+      return this.htmlContent_piaa92$_0;
+    },
+    set: function (value) {
+      var $receiver = this.mainElement;
+      var classId = 'mdl-dialog__content';
+      var $receiver_0 = document.createElement('div');
+      classType($receiver_0, classId);
+      var div = $receiver_0;
+      div.append(value);
       $receiver.append(div);
     }
   });
@@ -2959,7 +2974,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
     return Unit;
   }
   function Forums$createPage$lambda$lambda$lambda$lambda$lambda($receiver) {
-    $receiver.text = 'Pagina Principal';
+    $receiver.text = 'Pagina principal';
     $receiver.materialIcons = 'forum';
     $receiver.href = 'index.html';
     return Unit;
@@ -3074,23 +3089,48 @@ this['School-Web-Project'] = function (_, Kotlin) {
   Forums$MainPageCard.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.title, other.title) && Kotlin.equals(this.supportingText, other.supportingText)))));
   };
+  function Forums$content$lambda$lambda$lambda$lambda$lambda(this$) {
+    return function ($receiver) {
+      $receiver.title = 'Nuevo';
+      var $receiver_0 = this$;
+      var $receiver_1 = document.createElement('div');
+      classType($receiver_1, '');
+      var div = $receiver_1;
+      div.innerHTML = '\n                                 <form action="/nuevotema.php" method="get">\n                                      Tema:\n<input type="text" name="tema"><br>\n                                      Descripci\xF3n:\n<input type="text" name="desc"><br>\n                                      <input type="submit" value="Enviar">\n                                 <\/form>\n                                ';
+      $receiver_0.append(div);
+      $receiver.htmlContent = div;
+      return Unit;
+    };
+  }
+  function Forums$content$lambda$lambda$lambda$lambda($receiver) {
+    dialog($receiver, void 0, Forums$content$lambda$lambda$lambda$lambda$lambda($receiver));
+    return Unit;
+  }
+  function Forums$content$lambda$lambda$lambda($receiver) {
+    $receiver.size_vux9f0$();
+    $receiver.title = 'A\xF1adir tema';
+    $receiver.supportingText = 'Aca va una corta explicacion sobre la cosa que se va a hablar pero necesito que este texto sea mas largo una linea mas va a bastar creo';
+    $receiver.button = new Card$Button('sdfsdf', Color_getInstance().accent, Forums$content$lambda$lambda$lambda$lambda);
+    return Unit;
+  }
   var Array_0 = Array;
-  function Forums$content$lambda$lambda(this$Forums) {
+  function Forums$content$lambda$lambda(this$Forums, this$) {
     return function ($receiver) {
       var tmp$ = this$Forums;
-      var array = Array_0(50);
+      var array = Array_0(2);
       var tmp$_0;
       tmp$_0 = array.length - 1 | 0;
       for (var i = 0; i <= tmp$_0; i++) {
         array[i] = new Forums$MainPageCard('Tema', '\n                        Aca va una corta explicacion sobre\n                        la cosa que se va a hablar pero necesito\n                        que este texto sea mas largo una linea\n                        mas va a bastar creo\n                        ');
       }
       tmp$.createX_0($receiver, array);
+      this$.append($receiver.cellCard_oteltj$(4, void 0, void 0, Forums$content$lambda$lambda$lambda));
       return Unit;
     };
   }
   function Forums$content$lambda(this$Forums) {
     return function ($receiver) {
-      grid($receiver, void 0, Forums$content$lambda$lambda(this$Forums));
+      grid($receiver, void 0, Forums$content$lambda$lambda(this$Forums, $receiver));
       return Unit;
     };
   }
