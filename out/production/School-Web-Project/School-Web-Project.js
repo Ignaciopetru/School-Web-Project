@@ -2953,7 +2953,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   }
   function Forums() {
     Forums_instance = this;
-    this.content_77jnk1$_0 = content('Foros', new FloatingActionButton(), void 0, Forums$content$lambda(this));
+    this.content_77jnk1$_0 = content('Foros', void 0, void 0, Forums$content$lambda(this));
   }
   function Forums$createPage$lambda$lambda$lambda($receiver) {
     return Unit;
@@ -3162,7 +3162,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
     var $receiver_1 = document.createElement('header');
     classType($receiver_1, classId);
     var header = $receiver_1;
-    header.setAttribute('style', " background: url('images/whoiam.jpg') center / cover; padding: 10px;");
+    header.setAttribute('style', " background: url('images/icon.jpg') center / cover; padding: 10px;");
     $receiver_0.append(header);
     $receiver.nav_huf4ba$('navigation', MainPage$createPage$lambda$lambda$lambda$lambda);
     return Unit;

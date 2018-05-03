@@ -17,7 +17,7 @@ object Forums : MdlContent {
                 }
                 drawer("drawer") {
                     mainElement.header("drawer-header") {
-                        setAttribute("style", " background: url('images/whoiam.jpg') center / cover; padding: 10px;")
+                        setAttribute("style", " background: url('images/icon.jpg') center / cover; padding: 10px;")
                     }
 
                     nav("navigation") {
