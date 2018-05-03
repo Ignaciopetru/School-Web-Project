@@ -2030,6 +2030,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
     this.open_0();
     this.title_2eziy8$_0 = '';
     this.content_rj5df5$_0 = '';
+    this.htmlContent_piaa92$_0 = null;
     this.actionsSection_f3upp8$_0 = lazy(Dialog$actionsSection$lambda(this));
     this.buttonPrimary_hakxfc$_0 = null;
     this.buttonSecondary_qbz9qe$_0 = null;
@@ -2081,6 +2082,20 @@ this['School-Web-Project'] = function (_, Kotlin) {
       classType($receiver_0, classId);
       var div = $receiver_0;
       appendElement(div, 'p', Dialog$set_Dialog$content$lambda$lambda(value));
+      $receiver.append(div);
+    }
+  });
+  Object.defineProperty(Dialog.prototype, 'htmlContent', {
+    get: function () {
+      return this.htmlContent_piaa92$_0;
+    },
+    set: function (value) {
+      var $receiver = this.mainElement;
+      var classId = 'mdl-dialog__content';
+      var $receiver_0 = document.createElement('div');
+      classType($receiver_0, classId);
+      var div = $receiver_0;
+      div.append(value);
       $receiver.append(div);
     }
   });
@@ -2228,6 +2243,36 @@ this['School-Web-Project'] = function (_, Kotlin) {
   Dialog.$metadata$ = {
     kind: Kind_CLASS,
     simpleName: 'Dialog',
+    interfaces: []
+  };
+  function fab($receiver, cssClassId, init) {
+    if (cssClassId === void 0)
+      cssClassId = '';
+    var fab = new FloatingActionButton(cssClassId);
+    init(fab);
+    return fab.mainElement;
+  }
+  function FloatingActionButton(cssClassId) {
+    if (cssClassId === void 0)
+      cssClassId = '';
+    this.mainElement = null;
+    this.mainElement = createElement(document, 'button', FloatingActionButton_init$lambda(cssClassId));
+  }
+  function FloatingActionButton_init$lambda$lambda($receiver) {
+    classType($receiver, 'material-icons');
+    $receiver.textContent = 'add';
+    return Unit;
+  }
+  function FloatingActionButton_init$lambda(closure$cssClassId) {
+    return function ($receiver) {
+      classType($receiver, closure$cssClassId + ' mdl-button mdl-js-button mdl-button--fab mdl-button--colored');
+      $receiver.append(createElement(document, 'i', FloatingActionButton_init$lambda$lambda));
+      return Unit;
+    };
+  }
+  FloatingActionButton.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'FloatingActionButton',
     interfaces: []
   };
   var list = defineInlineFunction('School-Web-Project.components.list_tt4us9$', wrapFunction(function () {
@@ -2468,17 +2513,24 @@ this['School-Web-Project'] = function (_, Kotlin) {
     simpleName: 'Grid',
     interfaces: [MdlComponent]
   };
-  function content(title, cssClassId, body) {
+  function content(title, fab, cssClassId, body) {
+    if (fab === void 0)
+      fab = null;
     if (cssClassId === void 0)
       cssClassId = '';
-    return new Content(title, cssClassId, body);
+    return new Content(title, fab, cssClassId, body);
   }
-  function Content(title, cssClassId, body) {
+  function Content(title, fab, cssClassId, body) {
+    if (fab === void 0)
+      fab = null;
     if (cssClassId === void 0)
       cssClassId = '';
     MdlComponent.call(this, 'div', 'mdl-layout__content', cssClassId);
     this.title = title;
     body(this.mainElement);
+    if (fab != null) {
+      this.mainElement.append(fab.mainElement);
+    }
   }
   Content.$metadata$ = {
     kind: Kind_CLASS,
@@ -2916,27 +2968,46 @@ this['School-Web-Project'] = function (_, Kotlin) {
   }
   function Forums() {
     Forums_instance = this;
-    this.content_77jnk1$_0 = content('Foros', void 0, Forums$content$lambda);
+    this.content_77jnk1$_0 = content('Foros', void 0, void 0, Forums$content$lambda(this));
   }
   function Forums$createPage$lambda$lambda$lambda($receiver) {
     return Unit;
   }
   function Forums$createPage$lambda$lambda$lambda$lambda$lambda($receiver) {
-    $receiver.text = 'Foros';
+    $receiver.text = 'Pagina principal';
     $receiver.materialIcons = 'forum';
-    $receiver.href = 'forum.html';
+    $receiver.href = 'index.html';
+    return Unit;
+  }
+  function Forums$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
+    $receiver.title = 'Ingresar';
+    $receiver.buttonSecondary = Dialog$Dialog$Button_init();
+    return Unit;
+  }
+  function Forums$createPage$lambda$lambda$lambda$lambda$lambda$lambda($receiver) {
+    dialog($receiver, void 0, Forums$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda);
     return Unit;
   }
   function Forums$createPage$lambda$lambda$lambda$lambda$lambda_0($receiver) {
     $receiver.text = 'Ingresar';
     $receiver.materialIcons = 'account_circle';
-    $receiver.href = 'https://medium.com/lewisrhine';
+    $receiver.onClick_fatjke$(Forums$createPage$lambda$lambda$lambda$lambda$lambda$lambda);
+    return Unit;
+  }
+  function Forums$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    $receiver.title = 'Acerca de';
+    $receiver.content = 'Emmanuel Messulam';
+    $receiver.buttonSecondary = Dialog$Dialog$Button_init();
+    return Unit;
+  }
+  function Forums$createPage$lambda$lambda$lambda$lambda$lambda$lambda_0($receiver) {
+    dialog($receiver, void 0, Forums$createPage$lambda$lambda$lambda$lambda$lambda$lambda$lambda_0);
     return Unit;
   }
   function Forums$createPage$lambda$lambda$lambda$lambda$lambda_1($receiver) {
     $receiver.text = 'Acerca de';
     $receiver.materialIcons = 'info';
-    $receiver.href = 'https://github.com/lewisrhine';
+    $receiver.onClick_fatjke$(Forums$createPage$lambda$lambda$lambda$lambda$lambda$lambda_0);
     return Unit;
   }
   function Forums$createPage$lambda$lambda$lambda$lambda($receiver) {
@@ -2951,7 +3022,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
     var $receiver_1 = document.createElement('header');
     classType($receiver_1, classId);
     var header = $receiver_1;
-    header.setAttribute('style', " background: url('images/whoiam.jpg') center / cover; padding: 10px;");
+    header.setAttribute('style', " background: url('images/icon.jpg') center / cover; padding: 10px;");
     $receiver_0.append(header);
     $receiver.nav_huf4ba$('navigation', Forums$createPage$lambda$lambda$lambda$lambda);
     return Unit;
@@ -2973,9 +3044,95 @@ this['School-Web-Project'] = function (_, Kotlin) {
       return this.content_77jnk1$_0;
     }
   });
-  function Forums$content$lambda($receiver) {
-    $receiver.setAttribute('style', " background: url('images/whoiam.jpg') center / cover; filter: alpha(opacity=60); padding: 10px;");
+  function Forums$createX$lambda(closure$mainPageCard) {
+    return function ($receiver) {
+      $receiver.size_vux9f0$();
+      $receiver.title = closure$mainPageCard.title;
+      $receiver.supportingText = closure$mainPageCard.supportingText;
+      return Unit;
+    };
+  }
+  Forums.prototype.createX_0 = function ($receiver, mainPageCards) {
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== mainPageCards.length; ++tmp$) {
+      var mainPageCard = mainPageCards[tmp$];
+      $receiver.cellCard_oteltj$(4, void 0, void 0, Forums$createX$lambda(mainPageCard));
+    }
+  };
+  function Forums$MainPageCard(title, supportingText) {
+    this.title = title;
+    this.supportingText = supportingText;
+  }
+  Forums$MainPageCard.$metadata$ = {
+    kind: Kind_CLASS,
+    simpleName: 'MainPageCard',
+    interfaces: []
+  };
+  Forums$MainPageCard.prototype.component1 = function () {
+    return this.title;
+  };
+  Forums$MainPageCard.prototype.component2 = function () {
+    return this.supportingText;
+  };
+  Forums$MainPageCard.prototype.copy_puj7f4$ = function (title, supportingText) {
+    return new Forums$MainPageCard(title === void 0 ? this.title : title, supportingText === void 0 ? this.supportingText : supportingText);
+  };
+  Forums$MainPageCard.prototype.toString = function () {
+    return 'MainPageCard(title=' + Kotlin.toString(this.title) + (', supportingText=' + Kotlin.toString(this.supportingText)) + ')';
+  };
+  Forums$MainPageCard.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.title) | 0;
+    result = result * 31 + Kotlin.hashCode(this.supportingText) | 0;
+    return result;
+  };
+  Forums$MainPageCard.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.title, other.title) && Kotlin.equals(this.supportingText, other.supportingText)))));
+  };
+  function Forums$content$lambda$lambda$lambda$lambda$lambda(this$) {
+    return function ($receiver) {
+      $receiver.title = 'Nuevo';
+      var $receiver_0 = this$;
+      var $receiver_1 = document.createElement('div');
+      classType($receiver_1, '');
+      var div = $receiver_1;
+      div.innerHTML = '\n                                 <form action="/nuevotema.php" method="get">\n                                      Tema:\n<input type="text" name="tema"><br>\n                                      Descripci\xF3n:\n<input type="text" name="desc"><br>\n                                      <input type="submit" value="Enviar">\n                                 <\/form>\n                                ';
+      $receiver_0.append(div);
+      $receiver.htmlContent = div;
+      return Unit;
+    };
+  }
+  function Forums$content$lambda$lambda$lambda$lambda($receiver) {
+    dialog($receiver, void 0, Forums$content$lambda$lambda$lambda$lambda$lambda($receiver));
     return Unit;
+  }
+  function Forums$content$lambda$lambda$lambda($receiver) {
+    $receiver.size_vux9f0$();
+    $receiver.title = 'A\xF1adir tema';
+    $receiver.supportingText = 'Aca va una corta explicacion sobre la cosa que se va a hablar pero necesito que este texto sea mas largo una linea mas va a bastar creo';
+    $receiver.button = new Card$Button('sdfsdf', Color_getInstance().accent, Forums$content$lambda$lambda$lambda$lambda);
+    return Unit;
+  }
+  var Array_0 = Array;
+  function Forums$content$lambda$lambda(this$Forums, this$) {
+    return function ($receiver) {
+      var tmp$ = this$Forums;
+      var array = Array_0(2);
+      var tmp$_0;
+      tmp$_0 = array.length - 1 | 0;
+      for (var i = 0; i <= tmp$_0; i++) {
+        array[i] = new Forums$MainPageCard('Tema', '\n                        Aca va una corta explicacion sobre\n                        la cosa que se va a hablar pero necesito\n                        que este texto sea mas largo una linea\n                        mas va a bastar creo\n                        ');
+      }
+      tmp$.createX_0($receiver, array);
+      this$.append($receiver.cellCard_oteltj$(4, void 0, void 0, Forums$content$lambda$lambda$lambda));
+      return Unit;
+    };
+  }
+  function Forums$content$lambda(this$Forums) {
+    return function ($receiver) {
+      grid($receiver, void 0, Forums$content$lambda$lambda(this$Forums, $receiver));
+      return Unit;
+    };
   }
   Forums.$metadata$ = {
     kind: Kind_OBJECT,
@@ -2991,7 +3148,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   }
   function MainPage() {
     MainPage_instance = this;
-    this.content_mt7l9q$_0 = content('Pagina Principal', void 0, MainPage$content$lambda(this));
+    this.content_mt7l9q$_0 = content('Pagina Principal', void 0, void 0, MainPage$content$lambda(this));
   }
   function MainPage$createPage$lambda$lambda$lambda($receiver) {
     return Unit;
@@ -3045,7 +3202,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
     var $receiver_1 = document.createElement('header');
     classType($receiver_1, classId);
     var header = $receiver_1;
-    header.setAttribute('style', " background: url('images/whoiam.jpg') center / cover; padding: 10px;");
+    header.setAttribute('style', " background: url('images/icon.jpg') center / cover; padding: 10px;");
     $receiver_0.append(header);
     $receiver.nav_huf4ba$('navigation', MainPage$createPage$lambda$lambda$lambda$lambda);
     return Unit;
@@ -3130,7 +3287,6 @@ this['School-Web-Project'] = function (_, Kotlin) {
   MainPage$MainPageCard.prototype.equals = function (other) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.image, other.image) && Kotlin.equals(this.title, other.title) && Kotlin.equals(this.supportingText, other.supportingText)))));
   };
-  var Array_0 = Array;
   function MainPage$content$lambda$lambda(this$MainPage) {
     return function ($receiver) {
       var tmp$ = this$MainPage;
@@ -3340,6 +3496,8 @@ this['School-Web-Project'] = function (_, Kotlin) {
   Dialog.Button_init = Dialog$Dialog$Button_init;
   Dialog.Button = Dialog$Button;
   package$components.Dialog = Dialog;
+  package$components.fab_n31mlz$ = fab;
+  package$components.FloatingActionButton = FloatingActionButton;
   _.plus_mh1xch$ = plus;
   package$components.list_tt4us9$ = list;
   package$components.List = List;
@@ -3349,7 +3507,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
   package$layout.grid_c2af0n$ = grid;
   package$layout.Grid = Grid;
   var package$navigationlayout = package$layout.navigationlayout || (package$layout.navigationlayout = {});
-  package$navigationlayout.content_ra6vw2$ = content;
+  package$navigationlayout.content_y9n6yj$ = content;
   package$navigationlayout.Content = Content;
   package$navigationlayout.MdlContent = MdlContent;
   package$navigationlayout.Drawer = Drawer;
