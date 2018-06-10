@@ -67,7 +67,7 @@ object Forums : MdlContent {
                         """)
             })
 
-            append(cellCard(4) {
+            cellCard(4) {
                 size()
                 title = "Añadir tema"
                 supportingText = "Aca va una corta explicacion sobre la cosa que se va a hablar pero necesito que este texto sea mas largo una linea mas va a bastar creo"
@@ -88,7 +88,7 @@ object Forums : MdlContent {
                         //        color = Color.accent)
                     }
                 }
-            })
+            }
         }
     }
 

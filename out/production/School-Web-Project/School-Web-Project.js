@@ -3114,7 +3114,7 @@ this['School-Web-Project'] = function (_, Kotlin) {
     return Unit;
   }
   var Array_0 = Array;
-  function Forums$content$lambda$lambda(this$Forums, this$) {
+  function Forums$content$lambda$lambda(this$Forums) {
     return function ($receiver) {
       var tmp$ = this$Forums;
       var array = Array_0(2);
@@ -3124,13 +3124,13 @@ this['School-Web-Project'] = function (_, Kotlin) {
         array[i] = new Forums$MainPageCard('Tema', '\n                        Aca va una corta explicacion sobre\n                        la cosa que se va a hablar pero necesito\n                        que este texto sea mas largo una linea\n                        mas va a bastar creo\n                        ');
       }
       tmp$.createX_0($receiver, array);
-      this$.append($receiver.cellCard_oteltj$(4, void 0, void 0, Forums$content$lambda$lambda$lambda));
+      $receiver.cellCard_oteltj$(4, void 0, void 0, Forums$content$lambda$lambda$lambda);
       return Unit;
     };
   }
   function Forums$content$lambda(this$Forums) {
     return function ($receiver) {
-      grid($receiver, void 0, Forums$content$lambda$lambda(this$Forums, $receiver));
+      grid($receiver, void 0, Forums$content$lambda$lambda(this$Forums));
       return Unit;
     };
   }
