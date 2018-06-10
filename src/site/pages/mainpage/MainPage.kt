@@ -20,7 +20,7 @@ object MainPage : MdlContent {
                 }
                 drawer("drawer") {
                     mainElement.header("drawer-header") {
-                        setAttribute("style", " background: url('images/icon.jpg') center / cover; padding: 10px;")
+                        setAttribute("style", " background: url('assets/images/icon.jpg') center / cover; padding: 10px;")
                     }
 
                     nav("navigation") {
@@ -59,7 +59,7 @@ object MainPage : MdlContent {
     override val content = content("Pagina Principal") {
         grid {
             createX(Array(50) {
-                MainPageCard("images/weapons/$it.jpg", "Rithmio",
+                MainPageCard("assets/images/weapons/$it.jpg", "Rithmio",
                         """
                         At Rithmio I Introduced new technologies like
                         Kotlin and RxJava which have helped to make the
